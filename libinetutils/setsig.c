@@ -30,7 +30,7 @@ sighandler_t
 setsig (int sig, sighandler_t handler)
 {
 #ifdef HAVE_SIGACTION
-  struct sigaction sa, osa;
+  struct sigaction sa = { 0 }, osa = { 0 };
   sigemptyset (&sa.sa_mask);
   sigemptyset (&osa.sa_mask);
 # ifdef SA_RESTART
@@ -42,7 +42,7 @@ setsig (int sig, sighandler_t handler)
   return osa.sa_handler;
 #else /* !HAVE_SIGACTION */
 # ifdef HAVE_SIGVEC
-  struct sigvec sv, osv;
+  struct sigvec sv = { 0 }, osv = { 0 };
   sigemptyset (&sv.sv_mask);
   sigemptyset (&osv.sv_mask);
   sv.sv_handler = handler;
