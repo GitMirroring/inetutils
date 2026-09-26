@@ -19,6 +19,12 @@ client whose IP address has a reverse DNS name longer than around 200
 characters.
 Reported privately by Tristan Madani <tristan@talencesecurity.com>.
 
+** rlogin, rlogind, and telnetd no longer use uninitialized sigaction
+structures when setting up signals.  This could cause crashes leading to
+a denial of service, or potentially lead to code execution on
+architectures where the sa_restorer member is used.  CVE-2026-95510
+Reported privately by Brian Mak <brian.mak@hpe.com>.
+
 # Noteworthy changes in release 2.8 (2026-04-29) [stable]
 
 ** telnetd no longer supports the --debug (-D) option.  Previously, it
